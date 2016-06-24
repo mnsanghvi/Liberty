@@ -60,7 +60,7 @@ mkdir -p $TMPDIR
 _check_libgc() {
     title "Checking BDW GC"
 
-    cat > $TMPDIR/check_libgc.c <<EOF
+    cat  <<EOF > $TMPDIR/check_libgc.c
 #include <stdlib.h>
 #include <stdio.h>
 #include "gc/gc.h"
