@@ -53,5 +53,14 @@ script:
 # after_deploy:
 
 after_script:
+     - echo "******************************************************"
+     - echo "**           Liberty settings                       **"
+     - echo "******************************************************"
+     - cat target/liberty-eiffel/liberty.se
+     - echo ""
+     - echo ""
+     - echo "******************************************************"
+     - echo "**            Installation Log file                 **"
+     - echo "******************************************************"
      - cat target/log/install*log
 
