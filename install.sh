@@ -324,7 +324,7 @@ EOF
             progress 30 0 $MAXTOOLCOUNT "germ: $cmd"
             run $cmd || exit 1
         done
-       ${CC} ${LDFLAGS} *.o || (echo "ERROR:  linking failed." ; exit 1)
+       ${CC} ${LDFLAGS} *.o || (echo "ERROR:  linking failed." ; echo "LDFLAGS: ${LDFLAGS}" ; exit 1)
         test -e a.exe && mv a.exe a.out
         cp -a * $TARGET/bin/compile_to_c.d/
     fi
