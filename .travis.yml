@@ -6,6 +6,8 @@ branches:
   only:
     - build-ci
 
+## whitelist - end
+
 compiler:
   - gcc
 
@@ -28,9 +30,28 @@ addons:
      - netcat-openbsd
      - curl
 
+# before_install:
+
+# install:
+
+# before_script:
+
 script:
      - ./install.sh -plain -bootstrap
 
-after_failure:
+# after_failure
+
+# after_success
+
+## optional
+# before_deploy:
+
+## optional
+# deploy:
+
+## optional
+# after_deploy:
+
+after_script:
      - cat target/log/install*log
 
