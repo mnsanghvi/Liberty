@@ -28,6 +28,9 @@ addons:
      - netcat-openbsd
      - curl
 
-install:
-- ./install.sh -plain -bootstrap
+script:
+     - ./install.sh -plain -bootstrap
+
+after_failure:
+     - cat target/log/install*log
 
