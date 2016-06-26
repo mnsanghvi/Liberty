@@ -26,7 +26,6 @@ addons:
      - gccxml
      - reprepro
      - devscripts
-     - docbook-to-man
      - libgc-dev
      - libperl-dev
      - libgc1c2
