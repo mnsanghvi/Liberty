@@ -337,6 +337,8 @@ EOF
         while read cmd; do
             progress 30 1 $MAXTOOLCOUNT "T1: $cmd"
             run $cmd || exit 1
+	    error_code=$?
+	    test -e ${error_code} -eq 0 || (echo "ERROR:  compile or linking failed." ; echo "LDFLAGS: ${LDFLAGS}")
         done
     progress 30 1 $MAXTOOLCOUNT "T1: save"
     mkdir T1
