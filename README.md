@@ -1,3 +1,4 @@
+![](https://travis-ci.org/mnsanghvi/liberty-eiffel.svg)
 Liberty Eiffel
 ==============
 
