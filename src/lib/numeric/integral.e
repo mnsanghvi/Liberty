@@ -481,7 +481,7 @@ feature {ANY} -- Miscellaneous:
       end
 
    divisible (other: like Current): BOOLEAN
-      require
+      require else
          not_by_zero: other /= zero
       deferred
       ensure
@@ -493,7 +493,7 @@ feature {ANY} -- Miscellaneous:
       require
          Current > zero
       deferred
-
+      end
 
 feature {ANY} -- Modular arithmetic (these wrap around on overflow)
    infix "#+" (other: like Current): like Current

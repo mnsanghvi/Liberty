@@ -19,7 +19,6 @@ feature {ANY}
 
    attrib: INTEGER
          -- test attribute which initializes during the first access "self-initializing"
-      is
       attribute
          Result := 5
          -- see ECMA-367 chapter 8.18.1 this is some "object-level 
@@ -31,7 +30,7 @@ feature {ANY}
          -- of an atterbute to be executed? Only for the case a 
          -- Compound is given (i. e. it is initialized by the code above??
       end
-         
+   end    
 
 end -- class TEST_ATTRIBUTE03
 --
