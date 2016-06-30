@@ -1,6 +1,5 @@
-![](https://travis-ci.org/mnsanghvi/liberty-eiffel.svg)
 [![Build Status master](https://img.shields.io/travis/mnsanghvi/liberty-eiffel/master.svg?label=master&style=flat)](https://travis-ci.org/mnsanghvi/liberty-eiffel)
-[![Build Status next](https://img.shields.io/travis/mnsanghvi/liberty-eiffel/build-ci.svg?label=build-ci&style=flat)](https://travis-ci.org/mnsanghvi/liberty-eiffel)
+[![Build Status build-ci](https://img.shields.io/travis/mnsanghvi/liberty-eiffel/build-ci.svg?label=build-ci&style=flat)](https://travis-ci.org/mnsanghvi/liberty-eiffel)
 [![Status](https://img.shields.io/badge/status-active-brightgreen.svg?style=flat)](https://github.com/mnsanghvi/liberty-eiffel/pulse/monthly)
 
 Liberty Eiffel
