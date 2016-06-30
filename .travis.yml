@@ -8,7 +8,7 @@ notifications:
 ## whitelist
 branches:
   only:
-    - build-ci
+    - master
 
 ## whitelist - end
 
