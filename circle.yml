@@ -1,3 +1,4 @@
-general:
-   - ./install.sh -plain -bootstrap
+test:
+   override:
+      - ./install.sh -plain -bootstrap
    
