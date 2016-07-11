@@ -36,7 +36,7 @@ cd ${CANONICAL_SOURCE%/*}
 # export CXX=${CXX:-g++}
 export LIBERTY_HOME=$(pwd)
 export TARGET=${TARGET:-$LIBERTY_HOME/target}
-export TMPDIR=${TMPDIR:-$TARGET/tmp}
+export TMPDIR=${TARGET}/tmp
 export PATH=$TARGET/bin:$PATH
 export plain=${plain:-FALSE}
 export LOG=$TARGET/log/install$(date +'-%Y%m%d-%H%M%S').log
@@ -49,7 +49,6 @@ unset CDPATH
 #
 
 . $LIBERTY_HOME/work/tools.sh
-mkdir -p $TMPDIR
 
 ################################################################################
 #
@@ -59,6 +58,7 @@ mkdir -p $TMPDIR
 
 _check_libgc() {
     title "Checking BDW GC"
+    mkdir -p $TMPDIR
 
     cat  <<EOF > $TMPDIR/check_libgc.c
 #include <stdlib.h>
@@ -122,7 +122,7 @@ check_prerequisites() {
 
 bootstrap() {
     test -d $TARGET && rm -rf $TARGET
-    mkdir -p $TMPDIR
+    mkdir -p $TARGET
     cd $TARGET
     test -d log || mkdir log
 
