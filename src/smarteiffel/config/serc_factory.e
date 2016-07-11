@@ -26,7 +26,7 @@ feature {ANY}
             def.set_os(unix_system)
             if file_tools.is_readable("/etc/issue") then
                def.set_flavor("Linux")
-            end          
+            end
             add_to_chain(chain, "/etc/serc", "    ")
             add_to_chain(chain, "/etc/xdg/liberty-eiffel", "    ")
             add_to_chain(chain, "/etc/liberty-eiffel", "    ")
@@ -69,7 +69,7 @@ feature {ANY}
 
 feature {SYSTEM_TOOLS}
    seconf_env: STRING
-         -- The value of the SmartEiffel environment variable, if defined.
+         -- The value of the Liberty Eiffel config file path environment variable, if defined.
       once
          Result := env(fz_seconf)
       end

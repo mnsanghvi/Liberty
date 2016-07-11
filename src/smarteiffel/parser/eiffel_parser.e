@@ -510,7 +510,6 @@ feature {}
    S_finished_with_no_error_and_true:                  INTEGER 20
    S_finished_with_no_error_and_false:                 INTEGER 21
 
-
    a_manifest_or_type_test (syntax_flag: INTEGER_8): BOOLEAN
          --  ++ manifest_or_type_test_expression -> manifest_or_type_test [ "." after_a_dot ]
          --  ++ manifest_or_type_test -> integer |
@@ -725,13 +724,6 @@ feature {}
                   state := S_first_hexadecimal_digit
                   next_char
                when '_' then
-                  if pretty_view.count - 3 >= first_digit_index then
-                     if pretty_view.item(pretty_view.count - 3) /= '_' then
-                        error_handler.add_position(current_position)
-                        error_handler.append(em9)
-                        error_handler.print_as_fatal_error
-                     end
-                  end
                   pretty_view.extend(cc)
                   next_char
                when 'e', 'E' then
@@ -755,7 +747,7 @@ feature {}
                   end
                end
             when S_inside_a_real_just_after_the_dot then
-               if pretty_view.item(first_digit_index) = '0' and then   pretty_view.count - 1 /= first_digit_index then
+               if pretty_view.item(first_digit_index) = '0' and then pretty_view.count - 1 /= first_digit_index then
                   error_handler.add_position(pos(line, column - pretty_view.count + first_digit_index - 1))
                   error_handler.append(once "Removed non-significant digit(s) from integral part of real constant.")
                   error_handler.print_as_style_warning
@@ -806,7 +798,7 @@ feature {}
                   state := S_finished_with_no_error_and_true
                when '_' then
                   error_handler.add_position(current_position)
-                  error_handler.append(once "Underscore notation _ not supported inside fractional part.")
+                  error_handler.append(once "Underscore notation not supported inside fractional part.")
                   error_handler.print_as_fatal_error
                else
                   if pretty_view.first /= '{' then
@@ -5014,7 +5006,7 @@ feature {}
          --  ++                         "is" routine]
          --  ++
       local
-         is_prefix, is_infix, is_alias, expect_routine: BOOLEAN
+         is_prefix, is_infix, is_alias, is_constant, expect_routine: BOOLEAN
          prefix_sp, infix_sp, alias_sp: POSITION
       do
          from
@@ -5130,6 +5122,12 @@ feature {}
 
             if a_is then
                expect_routine := True
+            elseif cc = '=' then
+               is_constant := True
+               error_handler.add_position(current_position)
+               error_handler.append(once "Deleted optional %"=%".")
+               error_handler.print_as_warning
+               ok := skip1(cc)
             end
 
             if a_keyword(fz_unique) then
@@ -5155,6 +5153,11 @@ feature {}
                ok := skip1(';')
                last_feature_declaration.set_header_comment(get_comment)
             else
+               if is_constant then
+                  error_handler.add_position(current_position)
+                  error_handler.append(once "Bad constant-attribute definition. The feature value must be a manifest constant.")
+                  error_handler.print_as_fatal_error
+               end
                last_feature_declaration := a_routine(expect_routine)
             end
 
