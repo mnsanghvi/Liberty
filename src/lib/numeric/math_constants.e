@@ -11,7 +11,7 @@ feature {ANY} -- Maths constants:
    Pi: REAL 3.1415926535897932384626
          -- Pi
 
-   Pi_2: REAL 1.5707963267948966192313
+         Pi_2: REAL 1.5707963267948966192313
          -- Pi divided by 2
 
 	Pi_4: REAL 0.7853981633974483096156
@@ -22,7 +22,13 @@ feature {ANY} -- Maths constants:
 
    Sqr_2pi: REAL 2.50662827463100050241
          -- Square root of 2 pi
-
+         
+   Tau: REAL 6.2831852707795864769252
+         -- Tau (2Pi)
+         
+   Sqr_tau: REAL 2.50662827463100050241
+         -- Square root of Tau
+         
    Evalue: REAL 2.7182818284590452353602
          -- e (Euler's number)
 
