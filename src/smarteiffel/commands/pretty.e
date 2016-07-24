@@ -5,6 +5,7 @@ class PRETTY
    --
    -- The `pretty' command.
    --
+   --| TODO: support ACE files
 
 inherit
    COMMAND_LINE_TOOLS
@@ -33,7 +34,7 @@ feature {ANY}
         -no_warning         Don't print any warnings
 
       Message styles:
-         -flymake_mode      Display messages in a compact format suitable for
+        -flymake_mode       Display messages in a compact format suitable for
                              processing by tools such as Emacs' Flymake mode
 
       Style (default is -default):
@@ -59,7 +60,7 @@ feature {}
          smart_eiffel.set_pretty_flag
          search_for_verbose_flag
          if argument_count < 1 then
-            system_tools.bad_use_exit(command_line_name, command_line_help_summary)
+            fatal_bad_usage
          end
          from
             i := 1

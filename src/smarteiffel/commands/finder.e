@@ -50,7 +50,7 @@ feature {}
       do
          argc := argument_count
          if argc = 0 then
-            system_tools.bad_use_exit(command_line_name, command_line_help_summary)
+            fatal_bad_usage
          end
          search_for_verbose_flag
          ace_mode := ace_file_mode
@@ -62,7 +62,7 @@ feature {}
             arg := argument(argi)
             if ace.file_path /= Void and then arg.is_equal(ace.file_path) then
             elseif search_key /= Void then
-               system_tools.bad_use_exit(command_line_name, command_line_help_summary)
+               fatal_bad_usage
             elseif flag_match(fz_loadpath, arg) then
                if argi < argc then
                   system_tools.add_loadpath_file(argument(argi + 1))
@@ -72,7 +72,7 @@ feature {}
                   echo.w_put_string(once ": missing loadpath file path after -loadpath flag.%N")
                   die_with_code(exit_failure_code)
                end
-            elseif flag_match(once "raw", arg) then
+            elseif is_raw_flag(arg) then
                raw := True
             elseif is_some_flag(arg) then
                if is_valid_argument_for_ace_mode(arg) then
@@ -87,7 +87,7 @@ feature {}
             ace.command_line_parsed(command_line_name)
          end
          if search_key = Void then
-            system_tools.bad_use_exit(command_line_name, command_line_help_summary)
+            fatal_bad_usage
          end
          class_texts := smart_eiffel.find_paths_for(ace.root_class_name)
          if class_texts.is_empty then
@@ -116,19 +116,25 @@ feature {}
          end
       end
 
+   is_raw_flag (flag: STRING): BOOLEAN
+      do
+         Result := flag_match(once "raw", flag)
+      end
+
    is_valid_argument_for_ace_mode (arg: STRING): BOOLEAN
       do
          if is_some_flag(arg) then
-            if is_version_flag(arg) or else is_verbose_flag(arg) or else is_help_flag(arg) then
-               Result := True
-            end
+            Result := is_verbose_flag(arg)
+               or else is_version_flag(arg)
+               or else is_help_flag(arg)
+               or else is_raw_flag(arg)
          else
             Result := True
          end
       end
 
-   valid_argument_for_ace_mode: STRING "Only the -verbose, -version, and -help flags are allowed in ACE %
-      %file mode.%N"
+   valid_argument_for_ace_mode: STRING "Only the -verbose, -version, -help, and -raw flags are allowed in ACE file%N%
+      %mode.%N"
 
 end -- class FINDER
 --
